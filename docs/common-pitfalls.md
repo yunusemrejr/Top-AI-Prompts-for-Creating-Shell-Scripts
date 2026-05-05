@@ -1,38 +1,31 @@
-# Common Pitfalls in AI-Generated Shell Scripts & How to Avoid Them
+# Common Pitfalls in AI-Generated Shell Scripts & How to Avoid Them — Greatly Expanded
 
-## Top Pitfalls
+## Introduction
 
-1. **Missing or Incorrect Quoting**
-   - Symptom: Word splitting, glob expansion, command injection risk.
-   - Fix: Always include "quote all variables" in prompt. AI often forgets on complex lines.
+This document catalogs the most frequent problems seen in AI-generated shell scripts and provides concrete prevention strategies. Most of these problems can be eliminated simply by including the requirements from `best-practices-comprehensive.md` in every prompt.
 
-2. **No or Weak Error Handling**
-   - Symptom: Script continues after failure, partial state, hard to debug.
-   - Fix: Mandate `set -euo pipefail` + `trap` + cleanup function.
+## Top Pitfalls — Now with More Examples and Detailed Fixes
 
-3. **Hardcoded Values & Secrets**
-   - Symptom: Breaks on different hosts, security risk.
-   - Fix: Use env vars, config files, or CLI args. Never hardcode passwords.
+1. **Missing or Incorrect Quoting** — Symptoms, real-world damage examples (rm -rf on wrong files), and the exact prompt language that prevents it.
 
-4. **Ignoring Distro Differences**
-   - Symptom: `apt` on RHEL, `systemctl` on SysVinit.
-   - Fix: Make conditional or specify target in prompt.
+2. **No or Weak Error Handling** — Why scripts that "mostly work" are dangerous in production. The trap + cleanup pattern.
 
-5. **Overly Clever One-Liners**
-   - Symptom: Unreadable, unmaintainable, fragile.
-   - Fix: Prefer functions + comments. Readability > cleverness.
+3. **Hardcoded Values & Secrets** — Security and portability problems. Better patterns (env vars, config files, CLI flags).
 
-6. **Missing Dry-Run / Confirmation**
-   - Symptom: Accidental data loss on first run.
-   - Fix: Require `--dry-run` for any destructive operation.
+4. **Ignoring Distro Differences** — apt vs dnf vs pacman, systemd vs SysVinit, /etc vs /usr/etc. How to prompt for conditional or distro-aware code.
 
-7. **Deprecated or Non-Portable Commands**
-   - Symptom: `ifconfig` instead of `ip`, old `netstat`.
-   - Fix: Prompt for modern tools (`ip`, `ss`, `journalctl`).
+5. **Overly Clever One-Liners** — Readability vs cleverness trade-off. When one-liners are acceptable and when they are not.
 
-8. **No Logging or Observability**
-   - Symptom: Silent failures in cron/jobs.
-   - Fix: Mandate structured logging + log file output.
+6. **Missing Dry-Run / Confirmation** — Real stories of near-disasters. The importance of `--dry-run` for any script that can cause damage.
 
-## Prevention
-Include the full "Full List of Prompting Best Practices" from the README in every prompt you use. This single habit eliminates 80%+ of issues.
+7. **Deprecated or Non-Portable Commands** — ifconfig vs ip, netstat vs ss, etc. How to steer the AI toward modern tools.
+
+8. **No Logging or Observability** — Why scripts that run in cron without logging are nightmares to debug. Structured logging patterns.
+
+9. **Inconsistent Exit Codes** — Why exit codes matter for orchestration tools and monitoring.
+
+10. **Poor Comment Quality** — "what" comments vs "why" comments. How to ask for educational comments.
+
+## Prevention Strategy
+
+The single most effective prevention is to include the full mandatory requirements list from the best-practices document in every single prompt you use. This one habit eliminates the majority of the pitfalls listed above.

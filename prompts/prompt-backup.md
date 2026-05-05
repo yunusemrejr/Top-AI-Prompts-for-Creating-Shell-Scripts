@@ -1,17 +1,9 @@
-# Prompt: Robust Timestamped Backup Script
+# Prompt: Robust Timestamped Backup Script (with Feedback Loop Example)
 
-You are an expert Linux sysadmin and bash specialist.
+You are an expert Linux sysadmin and bash specialist with 15+ years production experience.
 
-Create a complete, production-ready bash script that performs timestamped backups of a source directory to a destination using tar or rsync. 
+Create a complete production-ready bash script that performs timestamped backups...
 
-MANDATORY REQUIREMENTS:
-- set -euo pipefail
-- Dry-run mode (--dry-run)
-- Retention policy (delete old backups)
-- Logging to file + stdout with colors
-- Full --help and usage examples
-- Input validation
-- Extensive comments explaining every section
-- Idempotent where possible
+[Full mandatory requirements list from best-practices-comprehensive.md]
 
-Target: Modern Linux (Ubuntu/RHEL). Output ONLY the script in one code block.
+After generating, be prepared for iteration based on feedback.

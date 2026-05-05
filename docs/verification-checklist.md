@@ -1,24 +1,30 @@
-# Verification & Quality Checklist for AI-Generated Shell Scripts
+# Verification & Quality Checklist for AI-Generated Shell Scripts — Expanded
 
-Before using any generated script in production or even staging:
+## Why a Checklist Matters
 
-- [ ] Shebang present and correct
-- [ ] `set -euo pipefail` (or documented why not)
-- [ ] All variables quoted
-- [ ] Input validation + helpful error messages
-- [ ] `--help` / usage function works
-- [ ] Dry-run mode implemented and tested
-- [ ] Logging to file + stdout (colors optional but nice)
-- [ ] Error traps and cleanup functions
-- [ ] No `eval` or dangerous patterns without strong justification
-- [ ] Dependencies checked with `command -v`
-- [ ] Idempotent where it makes sense (create user, install package, etc.)
-- [ ] ShellCheck passes with 0 errors/warnings (or explained)
-- [ ] Tested on target distro/kernel
-- [ ] No hardcoded secrets or paths that break portability
-- [ ] Comments explain *why*, not just *what*
-- [ ] Handles interrupts (Ctrl+C) gracefully
-- [ ] Exit codes meaningful (0 success, non-zero on failure)
-- [ ] Documentation updated (README or header)
+Even excellent AI output benefits from a systematic final review. This checklist is designed to be used both by humans and as a prompt for the AI itself to self-review.
 
-Run this checklist manually or prompt the LLM to self-review against it.
+## Full Expanded Checklist (17+ items with explanations)
+
+- [ ] Shebang present and correct for the target shell
+- [ ] `set -euo pipefail` present (or documented reason why not)
+- [ ] All variables properly quoted to prevent word splitting and injection
+- [ ] Input validation for every argument with helpful error messages
+- [ ] `--help` / usage function exists and is accurate
+- [ ] Dry-run mode implemented and tested for all state-changing operations
+- [ ] Logging implemented (stdout + file, optionally syslog)
+- [ ] Error traps and cleanup functions present
+- [ ] No dangerous patterns (`eval` on untrusted input, etc.)
+- [ ] Dependencies checked with `command -v` and helpful install messages
+- [ ] Idempotent where it makes sense (user creation, package install, config changes)
+- [ ] ShellCheck passes (or warnings are understood and acceptable)
+- [ ] Tested on target distro / kernel version
+- [ ] No hardcoded secrets or non-portable absolute paths
+- [ ] Comments explain *why* decisions were made (educational value)
+- [ ] Handles interrupts (Ctrl+C / SIGINT) gracefully via traps
+- [ ] Exit codes are meaningful and documented
+- [ ] Documentation / README updated if this is a shared tool
+
+## How to Use This Checklist with AI
+
+After receiving a script, paste this checklist into a new prompt and ask the AI to review its own work against it and suggest improvements.

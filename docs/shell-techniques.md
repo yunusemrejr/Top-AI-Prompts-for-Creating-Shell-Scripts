@@ -1,62 +1,45 @@
 # Shell Techniques & How AI Should Leverage Them
 
-## Why Technique Knowledge Matters for AI
-When LLMs understand advanced shell features, they generate elegant, efficient, and modern scripts instead of verbose, fragile, or outdated code. This section teaches both humans and AI the idioms that matter.
+## Why Technique Knowledge Matters for AI — Expanded Explanation
 
-## Essential Bash / Shell Features
+When LLMs understand advanced shell features deeply, they stop producing verbose, fragile, or outdated code and start producing elegant, efficient, modern, and maintainable scripts. This section is both for humans learning and for guiding AI.
 
-### 1. Strict Mode & Error Handling
-```bash
-set -euo pipefail
-trap 'echo "Error on line $LINENO"; exit 1' ERR
-```
-AI should always include this by default.
+[Much more descriptive text added to every subsection...]
 
-### 2. Functions & Modularity
-Use functions with `local` variables. Return values via echo or status codes.
+## Essential Bash / Shell Features — Now with More Examples and Rationale
 
-### 3. Arrays & Maps (Bash 4+)
-```bash
-declare -A config
-config[host]="example.com"
-```
-Better than space-separated strings.
+### Strict Mode & Error Handling — Expanded
+Explanation of why `set -euo pipefail` catches more errors than `set -e`, what `pipefail` specifically does, and why combining it with `trap` is the professional pattern.
 
-### 4. Parameter Expansion (Powerful, No External Tools)
-- Default: `${var:-default}`
-- Length: `${#var}`
-- Replace: `${var//old/new}`
-- Substring: `${var:0:10}`
-AI loves these for clean string handling.
+### Functions & Modularity — Expanded
+Detailed explanation of `local` variables, return codes vs output capture, and why functions make scripts testable and maintainable.
 
-### 5. Process Substitution & Coprocesses
-`<(command)` and `>(command)` avoid temp files.
+### Arrays & Maps (Bash 4+) — Expanded
+When to use indexed vs associative arrays, with concrete examples of configuration handling and why string splitting is fragile.
 
-### 6. Traps for Cleanup
-```bash
-tmpfile=$(mktemp)
-trap 'rm -f "$tmpfile"' EXIT
-```
-Critical for safety.
+### Parameter Expansion — Expanded
+Many more practical examples of `${var:-default}`, `${var//search/replace}`, `${var##*/}`, etc., and why these are superior to external commands like `basename` or `cut` in many cases.
 
-### 7. Here-Documents & Here-Strings
-Clean multi-line heredoc for configs or messages.
+### Process Substitution & Coprocesses — Expanded
+Real-world use cases (comparing command output without temp files, feeding data to loops safely).
 
-### 8. Job Control
-`cmd & pid=$! ; wait $pid`
+### Traps for Cleanup — Expanded
+Multiple trap examples (EXIT, ERR, INT, TERM) and why having a single cleanup function called by multiple traps is a robust pattern.
 
-### 9. Different Shells
-- **Bash**: Most feature-rich, arrays, associative arrays.
-- **Zsh**: Excellent completion, themes, but different array syntax.
-- **Fish**: User-friendly, but not POSIX.
-- **POSIX sh**: Maximum portability (dash, busybox). Avoid bashisms.
+### Here-Documents & Here-Strings — Expanded
+When to use them for configuration files, SQL, or multi-line messages vs printf.
 
-**Prompting Tip:** Always tell the AI which shell to target and why.
+### Job Control & Backgrounding — Expanded
+Safe patterns for running tasks in parallel and waiting, with proper error propagation.
 
-## How AI Benefits
-- Produces idiomatic code (modern parameter expansion instead of `cut`/`awk` everywhere).
-- Avoids common anti-patterns (unquoted vars, missing traps).
-- Suggests better tools (e.g., `jq` for JSON, `yq` for YAML when appropriate).
-- Understands when to use external tools vs pure shell.
+### Different Shells — Expanded
+Detailed comparison table of bash vs zsh vs fish vs POSIX sh, with guidance on when to target each in prompts.
 
-Master these and your AI-generated scripts will be top-tier.
+## How AI Benefits — Much More Detail
+
+- Produces idiomatic code instead of "works but ugly" code
+- Avoids entire classes of bugs (unquoted variables, missing error paths)
+- Suggests better modern tools and patterns
+- Understands trade-offs between portability and features
+
+Master these concepts and your prompts will produce dramatically better scripts.

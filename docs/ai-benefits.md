@@ -1,26 +1,28 @@
-# Why Use AI for Shell Script Creation? Benefits, Limitations & Best Workflow
+# Why Use AI for Shell Script Creation? Benefits, Limitations & Best Workflow — Expanded
 
-## Major Benefits
+## Major Benefits — With More Real-World Context
 
-- **Speed**: Generate complex scripts in seconds instead of hours.
-- **Consistency**: Enforce best practices across your team via shared prompts.
-- **Learning**: New sysadmins learn modern patterns by studying AI output + comments.
-- **Exploration**: Quickly prototype variations (different logging, different tools).
-- **Coverage**: AI can suggest edge cases you forgot.
+- Speed of initial draft
+- Consistency across a team when using shared prompt templates
+- Learning tool for junior engineers (studying well-commented AI output)
+- Rapid prototyping of variations
+- AI can surface edge cases the human forgot to mention
 
-## Limitations & Risks
-- **Hallucinations**: May invent non-existent commands or flags.
-- **Context Loss**: Forgets earlier constraints in long conversations.
-- **Security Blind Spots**: May miss injection vectors or permission issues.
-- **Style Drift**: Different models produce different coding styles.
-- **Over-Confidence**: Looks correct but has subtle bugs.
+## Limitations & Risks — With Concrete Examples
 
-## Recommended Workflow (Human + AI Partnership)
-1. Human defines clear requirements + constraints.
-2. AI generates initial version.
-3. Human reviews with ShellCheck + checklist.
-4. AI helps iterate on fixes/improvements.
-5. Human tests thoroughly (dry-run → limited scope → full).
-6. Human takes final responsibility.
+- Hallucinations (non-existent flags, wrong command names)
+- Context loss in long conversations
+- Security blind spots
+- Style and quality variance between models
+- Over-confidence in incorrect code
 
-This repo exists to make step 1 and 3 dramatically easier and higher quality.
+## Recommended Human + AI Partnership Workflow — Detailed Steps
+
+1. Human defines clear requirements + constraints (using this repo's templates)
+2. AI generates initial version
+3. Human reviews with ShellCheck + checklist
+4. AI helps iterate using feedback loop patterns
+5. Human performs final testing (dry-run → limited → full)
+6. Human takes final responsibility and deploys
+
+This partnership model leverages the strengths of both parties and mitigates the weaknesses of each.

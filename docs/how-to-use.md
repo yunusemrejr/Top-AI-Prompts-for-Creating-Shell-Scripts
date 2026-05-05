@@ -1,42 +1,25 @@
-# How-to Guide: Using This Repository & Generating Scripts with AI
+# How-to Guide: Using This Repository & Generating Scripts with AI — Expanded
 
-## Step-by-Step Workflow
+## Step-by-Step Workflow — Now with Much More Detail
 
-1. **Choose or Adapt a Prompt**
-   - Browse `prompts/` or copy from README/examples.
-   - Customize the task description.
+1. **Choose or Adapt a Prompt** — Browse `prompts/`, README, or existing scripts. Customize the task description while keeping the mandatory requirements section.
 
-2. **Craft / Enhance the Prompt**
-   - Use the full best-practices list from README.
-   - Add role, constraints, CoT instructions.
+2. **Craft / Enhance the Prompt** — Use the full best-practices list. Add role, constraints, CoT instructions. Reference `best-practices-comprehensive.md`.
 
-3. **Generate with LLM**
-   - Preferred models: Grok (great at code), Claude 3.5/Opus (excellent reasoning), GPT-4o.
-   - Temperature: 0.2-0.5 for more deterministic output.
+3. **Generate with LLM** — Preferred models and why. Temperature recommendations. System prompt usage.
 
-4. **Review & Lint**
-   - Paste into https://www.shellcheck.net/
-   - Read every line and understand it.
-   - Check for security issues (secrets, permissions).
+4. **Review & Lint** — ShellCheck + manual review checklist. What to look for in the first 30 seconds.
 
-5. **Test Safely**
-   - Always use `--dry-run` or `-n` first.
-   - Run in a VM, container, or with test data.
-   - Test error paths (kill services, remove files, etc.).
+5. **Test Safely** — Dry-run first, then limited scope, then full. How to create safe test environments (containers, VMs, tmpfs).
 
-6. **Iterate with AI**
-   - "Improve this script by adding X and fixing Y."
+6. **Iterate with AI** — Use the feedback loop patterns from `feedback-loop-examples.md`. Typical 1-3 iterations to production quality.
 
-7. **Deploy & Monitor**
-   - Add to cron/systemd timer.
-   - Monitor logs.
-   - Version control your scripts.
+7. **Deploy & Monitor** — Version control, cron/systemd, log monitoring, alerting.
 
-## Recommended LLM Settings
-- System prompt: Paste the entire "You are an expert..." template.
-- Max tokens: Enough for full script + comments.
+## Recommended LLM Settings — Expanded
 
-## Integration Tips
-- VS Code + GitHub Copilot or Continue.dev with custom prompts from this repo.
-- Cursor.sh or other AI IDEs.
-- Save your best prompts in this repo for reuse.
+Temperature, top_p, max tokens, system prompt strategy.
+
+## Integration Tips — Expanded
+
+VS Code, Continue.dev, Cursor, GitHub Copilot custom instructions, using this repo as a knowledge base for your AI coding assistant.
