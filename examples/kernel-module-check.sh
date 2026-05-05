@@ -1,36 +1,40 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+###############################################################################
+# kernel-module-check.sh
+# Deep kernel inspection: modules, parameters, sysctls, security settings
+# Usage: ./kernel-module-check.sh [--json] [--security]
+###############################################################################
 
 set -euo pipefail
 
-# Advanced example: Check for kernel modules, loaded modules, and version-specific info
+log() { echo -e "\033[0;32m[INFO]\033[0m $*"; }
 
-KERNEL_VERSION="$(uname -r)"
-echo "Kernel version: $KERNEL_VERSION"
+JSON=false
+SECURITY=false
 
-# List loaded modules
-echo "Loaded kernel modules:"
-lsmod | head -20
-
-# Check for specific modules (e.g., for NVIDIA, WiFi)
-for module in nvidia iwlmvm; do
-    if lsmod | grep -q "^$module"; then
-        echo "✓ $module module is loaded"
-    else
-        echo "✗ $module module not loaded"
-    fi
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --json) JSON=true; shift ;;
+    --security) SECURITY=true; shift ;;
+    *) echo "Unknown: $1"; exit 1 ;;
+  esac
 done
 
-# Kernel parameters
-echo "Kernel command line:"
-cat /proc/cmdline
+KERNEL=$(uname -r)
+log "Kernel: $KERNEL"
 
-# Check sysctl for security-related settings
-echo "Key security sysctls:"
-sysctl -a | grep -E 'randomize|protect|exec' | head -10 || true
-
-# Suggest missing modules or tools
-if ! command -v modinfo &> /dev/null; then
-    echo "modinfo not available. Install kmod package."
+if $JSON; then
+  echo '{"kernel":"'"$KERNEL"'"}'
+else
+  echo "=== Loaded Modules (first 15) ==="
+  lsmod | head -15
+  echo "=== Key Sysctls (security & randomness) ==="
+  sysctl -a 2>/dev/null | grep -E 'randomize|protect|exec|kptr' | head -10 || true
+  if $SECURITY; then
+    echo "=== Security-Related Kernel Params ==="
+    sysctl kernel.kptr_restrict kernel.dmesg_restrict kernel.unprivileged_userns_clone 2>/dev/null || true
+  fi
 fi
 
-echo "Script completed. For module management, use modprobe."
+log "For module management use: modprobe, lsmod, modinfo"
